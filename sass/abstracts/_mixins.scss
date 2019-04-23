@@ -12,3 +12,29 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+// Media query manager
+
+/*
+0 - 600px:    Phone
+600 - 900px:  Tablet ladscape
+900 - 1200px  Tablet landscape
+[1200 - 1800] is our normal styles apply
+1800px + :    Big desktop
+*/
+
+
+$device-bps: ('mobile': (max-width: 37.5em),              // 600px
+'tab-port': '(min-width: 37.56em) and (max-width: 56.25em)',  // 601px - 900px
+'tab-lan': '(min-width: 56.3em) and (max-width: 75em)',   // 901px - 1200px
+'big-desktop': (min-width: 112.5em));                         // 1800px
+
+@mixin respond-to($devices...) {
+    @each $device in $devices {
+        @media #{map-get($device-bps, $device)} {
+            @content;
+        }
+    }
+}
+
+

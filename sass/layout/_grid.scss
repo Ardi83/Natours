@@ -1,18 +1,38 @@
  .row {
    max-width: $grid-width;
    margin: 0 auto;
+
+   @include respond-to(tab-port, mobile) {
+     max-width: 50rem;
+     padding: 0 3rem;
+   }
    
    &:not(:last-child) {
      margin-bottom: $gutter-vertical;
+     
+     @include respond-to(tab-port, mobile) {
+       margin-bottom: $gutter-vertical-small;
+     }
    }
 
    @include clearfix;
 
    [class^="col-"] {
-      &:not(:last-child) {
+    float: left;
+      
+    &:not(:last-child) {
       margin-right: $gutter-horizontal;
+      
+      @include respond-to(tab-port, mobile) {
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
       }
-      float: left;
+
+      }
+
+      @include respond-to(tab-port, mobile) {
+        width: 100% !important;
+      }
     }
 
    .col-1-of-2 {

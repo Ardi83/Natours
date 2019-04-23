@@ -5,10 +5,22 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "node-sass": "^4.11.0"
+    "autoprefixer": "^9.5.1",
+    "concat": "^1.0.3",
+    "node-sass": "^4.11.0",
+    "postcss": "^7.0.14",
+    "postcss-cli": "^6.1.2"
   },
   "scripts": {
-    "compile:sass": "node-sass sass/main.scss css/style.css --watch"
+    "watch:sass": "node-sass sass/main.scss css/style.css --watch",
+    "devserver": "live-server",
+    "start": "npm run devserver --parallel npm run watch:sass",
+    
+    "compile:sass": "node-sass sass/main.scss css/style.comp.css",
+    "concat:css": "concat -o css/style.concat.css css/icon-font.css css/style.comp.css",
+    "prefix:css": "postcss --use autoprefixer -c options.json -o css/style.prefix.css css/style.concat.css",
+    "compress:css": "node-sass css/style.prefix.css css/style.css --output-style compressed",
+    "build:css": "npm run compile:sass && npm run concat:css && npm run prefix:css && npm run compress:css"
   },
   "author": "Ardi",
   "license": "ISC"
